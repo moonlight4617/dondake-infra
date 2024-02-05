@@ -2,14 +2,14 @@ FROM php:8.1-apache-bullseye
 
 # apt install iputils-ping net-tools で ping を導入
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev libzip-dev unzip vim iputils-ping net-tools sudo\
+  && apt-get install -y zlib1g-dev libzip-dev unzip vim net-tools sudo\
   && docker-php-ext-install zip
 
 # node と npm をインストール
-RUN apt-get install -y gnupg
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -\
-  && apt-get install -y nodejs\
-  && npm install npm@8.12.1 --global
+# RUN apt-get install -y gnupg
+# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -\
+#   && apt-get install -y nodejs\
+#   && npm install npm@8.12.1 --global
 
 COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
@@ -33,6 +33,8 @@ COPY ./src/dondake /var/www/html
 
 WORKDIR /var/www/html
 
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
 RUN chown www-data storage/ -R \
-  && composer install --no-scripts --no-interaction\
-  && npm install
+  && composer install --no-scripts --no-interaction
