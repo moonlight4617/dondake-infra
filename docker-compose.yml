@@ -15,8 +15,17 @@ services:
       - ./docker/apache/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - db
+      - frontend
     networks:
       - net1
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/front/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
   db:
     container_name: db
     build:
