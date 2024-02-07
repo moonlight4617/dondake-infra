@@ -8,8 +8,8 @@ services:
       dockerfile: ./docker/apache/Dockerfile
     ports:
       - 80:80
-    environment:
-      COMPOSER_ALLOW_SUPERUSER: 1
+    # environment:
+    #   COMPOSER_ALLOW_SUPERUSER: 1
     volumes:
       - ./src/dondake:/var/www/html
       - ./docker/apache/php.ini:/usr/local/etc/php/php.ini

@@ -23,5 +23,7 @@ WORKDIR /var/www/html
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 RUN chown www-data storage/ -R \
   && composer install --no-scripts --no-interaction
