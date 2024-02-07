@@ -2,6 +2,10 @@ FROM php:8.1-apache-bullseye
 
 COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
+RUN apt-get update \
+  && apt-get install -y zlib1g-dev libzip-dev unzip sudo\
+  && docker-php-ext-install zip
+
 # a2emod rewrite をして apache に rewrite モジュールを追加
 # これをしないと Laravel でルート以外にアクセスできない
 RUN a2enmod rewrite
