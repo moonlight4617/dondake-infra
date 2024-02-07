@@ -6,7 +6,7 @@ RUN apt-get update \
   && docker-php-ext-install zip
 
 # node と npm をインストール
-RUN apt-get install -y gnupg
+# RUN apt-get install -y gnupg
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -\
   && apt-get install -y nodejs\
   && npm install npm@8.12.1 --global
